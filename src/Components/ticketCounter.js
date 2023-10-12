@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Security from "./security";
 
 
 function  TicketCounter(){
@@ -33,6 +34,7 @@ function  TicketCounter(){
               Guest {index + 1}: Age
               <input
                 type="number"
+                className="input-style"
                 value={guest.age}
                 onChange={(e) => {
                   const updatedGuests = guests.slice();
@@ -43,10 +45,21 @@ function  TicketCounter(){
             </div>
           ))}
         </div>
-        <button onClick={() => setGuests([...guests, { age: 0 }])}>
+        <div className="button-container">
+        <button className="button-style" onClick={() => setGuests([...guests, { age: 0 }])}>
           Add Guest
         </button>
-        <button onClick={issueTicket}>Issue Ticket</button>
+        <button onClick={issueTicket} className="button-style">Issue Ticket</button>
+        </div>
+        {ticket && (
+        <>
+          <div>
+            <h3>Issued Ticket:</h3>
+            <p className="text-color">Total Charges: INR {ticket.totalCharges}</p>
+          </div>
+          <Security ticket={ticket} />
+        </>
+      )}
       </div>
         </>
     )
